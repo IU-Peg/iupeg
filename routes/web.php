@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/payment/{adquirer}/{call}', [\App\Http\Controllers\Payment\PaymentController::class, 'payment']);
+Route::get("/cart", [\App\Http\Controllers\Cart\CartController::class, "teste"]);
