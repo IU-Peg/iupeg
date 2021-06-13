@@ -12,7 +12,7 @@ env:
 phases:
   install:
     runtime-versions:
-      php: 7.4.11
+      php: 8.0
     commands:
      - yarn global add serverless --non-interactive --silent
   pre_build:
