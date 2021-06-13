@@ -3,11 +3,12 @@ version: 0.2
 env:
   variables:
     COMPOSER_CACHE_DIR: .cache/composer
+    DB_USERNAME: admin
+    DB_DATABASE: iupeg
+
   parameter-store:
     DB_PASSWORD: /main/dev/DB_PASSWORD
-    DB_USERNAME: admin
     DB_HOST: /main/dev/DB_HOST
-    DB_DATABASE: iupeg
 
 phases:
   install:
@@ -15,7 +16,6 @@ phases:
       nodejs: 12
     commands:
      - yarn global add serverless --non-interactive --silent
-     - mkdir -p .cache/composer
   pre_build:
     commands:
     - composer install --optimize-autoloader --no-dev
@@ -41,7 +41,3 @@ artifacts:
   - composer.lock
   - package.json
   - yarn.lock
-
-cache:
-  paths:
-    - .cache/composer/**/*
