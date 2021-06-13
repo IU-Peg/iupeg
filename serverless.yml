@@ -1,0 +1,41 @@
+service: iupeg-main
+
+provider:
+    name: aws
+    # The AWS region in which to deploy (us-east-1 is the default)
+    region: us-east-1
+    stage: ${opt:stage, 'dev'}
+    runtime: provided.al2
+    environment:
+        APP_DEBUG: ${self:custom.app_debug.${opt:stage, self:provider.stage}}
+        APP_KEY: "base64:YG4iFYFd5yrWJLhLyMsp6ve1i4cXWI+MB5biN8Y6VDo="
+        DB_PASSWORD: ${ssm:/main/dev/DB_PASSWORD~true}
+        DB_USERNAME: admin
+        DB_HOST: ${ssm:/main/dev/DB_HOST~true}
+    ecr:
+        images:
+            laravel:
+                path: ./
+
+custom:
+  app_debug:
+    dev: true
+    prod: false
+
+package:
+    # Directories to exclude from deployment
+    patterns:
+        - node_modules/**
+        - public/storage
+        - resources/assets/**
+        - storage/**
+        - tests/**
+        - vendor/**
+
+functions:
+    # This function runs the Laravel website/API
+    web:
+        image:
+            name: laravel
+        events:
+            -   httpApi: '*'

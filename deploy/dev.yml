@@ -1,0 +1,47 @@
+version: 0.2
+
+env:
+  variables:
+    COMPOSER_CACHE_DIR: .cache/composer
+  parameter-store:
+    DB_PASSWORD: /main/dev/DB_PASSWORD
+    DB_USERNAME: admin
+    DB_HOST: /main/dev/DB_HOST
+    DB_DATABASE: iupeg
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+     - yarn global add serverless --non-interactive --silent
+     - mkdir -p .cache/composer
+  pre_build:
+    commands:
+    - composer install --optimize-autoloader --no-dev
+    - php artisan migrate --seed
+  build:
+    commands:
+    - serverless deploy
+artifacts:
+  files:
+  - serverless.yml
+  - app/**/*
+  - bootstrap/**/*
+  - config/**/*
+  - database/**/*
+  - public/**/*
+  - resources/**/*
+  - routes/**/*
+  - scripts/**/*
+  - vendor/**/*
+  - node_modules/**/*
+  - artisan
+  - composer.json
+  - composer.lock
+  - package.json
+  - yarn.lock
+
+cache:
+  paths:
+    - .cache/composer/**/*
