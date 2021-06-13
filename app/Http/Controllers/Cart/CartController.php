@@ -64,4 +64,7 @@ class CartController extends Controller
         }
     }
 
+    public function teste(Request $request){
+        return response()->json(["success" => "ok"]);
+    }
 }
