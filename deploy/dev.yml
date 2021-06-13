@@ -2,7 +2,6 @@ version: 0.2
 
 env:
   variables:
-    COMPOSER_CACHE_DIR: .cache/composer
     DB_USERNAME: admin
     DB_DATABASE: iupeg
 
@@ -23,6 +22,7 @@ phases:
   build:
     commands:
     - serverless deploy
+
 artifacts:
   files:
   - serverless.yml
