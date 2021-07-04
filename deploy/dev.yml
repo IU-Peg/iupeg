@@ -18,7 +18,7 @@ phases:
   pre_build:
     commands:
     - composer install --optimize-autoloader --no-dev --ignore-platform-reqs
-    - php artisan migrate --seed
+    - php artisan migrate
   build:
     commands:
     - serverless deploy
