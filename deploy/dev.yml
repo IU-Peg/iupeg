@@ -8,6 +8,7 @@ env:
   parameter-store:
     DB_PASSWORD: /main/dev/DB_PASSWORD
     DB_HOST: /main/dev/DB_HOST
+    APP_ENV: local
 
 phases:
   install:
