@@ -4,11 +4,11 @@ env:
   variables:
     DB_USERNAME: admin
     DB_DATABASE: iupeg
+    APP_ENV: local
 
   parameter-store:
     DB_PASSWORD: /main/dev/DB_PASSWORD
     DB_HOST: /main/dev/DB_HOST
-    APP_ENV: local
 
 phases:
   install:
