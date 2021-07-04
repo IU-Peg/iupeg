@@ -17,7 +17,7 @@ phases:
      - yarn global add serverless --non-interactive --silent
   pre_build:
     commands:
-    - composer install --optimize-autoloader --no-dev
+    - composer install --optimize-autoloader --no-dev --ignore-platform-reqs
     - php artisan migrate --seed
   build:
     commands:
